@@ -28,6 +28,10 @@ module.exports = {
           // Compiles Sass to CSS
           "sass-loader"
         ]
+      },
+      {
+        test: /\.svg$/,
+        loader: "svg-inline-loader?classPrefix"
       }
     ]
   },
