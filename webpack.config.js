@@ -1,22 +1,22 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 module.exports = {
+  entry: "./src/index.tsx",
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.tsx?$/,
+        use: "ts-loader",
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
-          }
-        ]
+            loader: "html-loader",
+          },
+        ],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -26,19 +26,26 @@ module.exports = {
           // Translates CSS into CommonJS
           "css-loader",
           // Compiles Sass to CSS
-          "sass-loader"
-        ]
+          "sass-loader",
+        ],
       },
       {
         test: /\.svg$/,
-        loader: "svg-inline-loader?classPrefix"
-      }
-    ]
+        loader: "svg-inline-loader?classPrefix",
+      },
+    ],
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"],
+  },
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/index.html",
-      filename: "./index.html"
-    })
-  ]
+      filename: "./index.html",
+    }),
+  ],
 };
