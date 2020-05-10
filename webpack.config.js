@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   module: {
@@ -7,16 +8,16 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.html$/,
         use: [
           {
-            loader: "html-loader"
-          }
-        ]
+            loader: "html-loader",
+          },
+        ],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -26,19 +27,20 @@ module.exports = {
           // Translates CSS into CommonJS
           "css-loader",
           // Compiles Sass to CSS
-          "sass-loader"
-        ]
+          "sass-loader",
+        ],
       },
       {
         test: /\.svg$/,
-        loader: "svg-inline-loader?classPrefix"
-      }
-    ]
+        loader: "svg-inline-loader?classPrefix",
+      },
+    ],
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: "./src/index.html",
-      filename: "./index.html"
-    })
-  ]
+      filename: "./index.html",
+    }),
+    new Dotenv(),
+  ],
 };
